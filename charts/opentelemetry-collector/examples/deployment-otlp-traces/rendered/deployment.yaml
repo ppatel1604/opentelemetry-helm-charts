@@ -25,16 +25,17 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: ada307f23586efc24217b6779ab69c3b8e80cf66d6a55010580c5374a796e062
-
+        checksum/config: ea73383cade3784a7c853b8d2066c3b50a238f904c8d028c787d0113f840ceb9
+        
       labels:
         app.kubernetes.io/name: opentelemetry-collector
         app.kubernetes.io/instance: example
         component: standalone-collector
-
+        
     spec:
-
+      
       serviceAccountName: example-opentelemetry-collector
+      automountServiceAccountToken: true
       securityContext:
         {}
       containers:
@@ -48,7 +49,7 @@ spec:
           image: "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s:0.127.0"
           imagePullPolicy: IfNotPresent
           ports:
-
+            
             - name: otlp
               containerPort: 4317
               protocol: TCP

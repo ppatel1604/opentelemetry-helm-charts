@@ -26,16 +26,17 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: a822d07134d17af50e4a18e215c844bfdd09e59c38ee9d42b750f8923c4eda92
-
+        checksum/config: c2cd108ef16eda448f4d98742fea6cc10a66de1c04716410da7adf777870702e
+        
       labels:
         app.kubernetes.io/name: opentelemetry-collector
         app.kubernetes.io/instance: example
         component: statefulset-collector
-
+        
     spec:
-
+      
       serviceAccountName: example-opentelemetry-collector
+      automountServiceAccountToken: true
       securityContext:
         {}
       containers:
@@ -49,7 +50,7 @@ spec:
           image: "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s:0.127.0"
           imagePullPolicy: IfNotPresent
           ports:
-
+            
             - name: jaeger-compact
               containerPort: 6831
               protocol: UDP
